@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.3.0/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 100%;height:400px;"></div>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        backgroundColor: '#FBFBFB',
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['分账收入']
+        },
+
+        calculable: true,
+
+
+        xAxis: [
+            {
+                axisLabel: {
+                    rotate: 30,
+                    interval: 0
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#CECECE'
+                    }
+                },
+                type: 'category',
+                boundaryGap: false,
+                data: function () {
+                    var list = [];
+                    for (var i = 1; i <= 31; i++) {
+                        var day;
+                        if (i < 10) {
+                            day = '0' + i;
+                        } else {
+                            day = i;
+                        }
+                        list.push(day);
+                    }
+                    return list;
+                }()
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLine: {
+                    lineStyle: {
+                        color: '#CECECE'
+                    }
+                }
+            }
+        ],
+        series: [
+            {
+                name: '分账收入',
+                type: 'line',
+                symbol: 'none',
+                smooth: 0.2,
+                color: ['#66AEDE'],
+                data: function () {
+                    var list = [800, 300, 500, 800, 300, 600, 500, 600];
+                    for (var i = 1; i <= 31; i++) {
+                        if (i <= 8) {
+                            continue;
+                        }
+                        list.push(100);
+                    }
+                    return list;
+                }()
+            },
+        ]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>
